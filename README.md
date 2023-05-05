@@ -53,7 +53,10 @@ Ansible is an open source IT automation tool that automates provisioning, config
 
 ## Use Cases of Ansible
 
-
+- Provisioning: Provisioning is creating new infrastructure. 
+- Continuous Delivery: Ansible provides a simpler way to automatically deploy applications. 
+- Application Deployment: Ansible provides a simpler way to deploy applications across the infrastructure. 
+- Ansible for Cloud Computing: Ansible makes it easy to provision instances across all cloud providers
 
 
 
