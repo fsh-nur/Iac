@@ -61,7 +61,9 @@ Ansible is an open source IT automation tool that automates provisioning, config
 ## What is Yet Another Markup Language YAML
 Most formatting languages display data in a non-human readable format. Even JSON, the most popular data format in use, has poor code readability. YAML is an alternative to JSON that formats data in a natural, easy-to-read, and concise manner.
 
+## What are Ansible Plkaybooks
 
+Ansible playbooks are text files or configuration files that are written in particular format called YAML. These are expressed in the YAML format and have a minimum of syntax, which is not to be a programming language or script, but rather a model of a configuration. Each playbook includes one or more "plays" in a list. The goal of a play is to map a group of hosts to some well-defined roles and tasks. A task is nothing but a call or operation, which applies on group of hosts.
 
 
 
