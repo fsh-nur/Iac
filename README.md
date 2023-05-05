@@ -51,6 +51,8 @@ Ansible is an open source IT automation tool that automates provisioning, config
 - Ansible is agentless because we only need to install ansible on the controller, this method also makes the connection simple.
 - It uses YAML. It is very powerful, but at the same time, very easy to learn.
 
+## Use Cases of Ansible
+
 
 
 
