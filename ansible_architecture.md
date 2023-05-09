@@ -80,3 +80,63 @@ CTRL + X yes
 sudo ansible web -m copy -a "src=/etc/ansible/testing.txt dest=/home/vagrant"
 ```
 
+## Installing nginx using an ansible playbook
+
+![Creating a playbook to install nginx yaml file](https://github.com/fsh-nur/Iac/assets/129324316/d5a92fd7-957c-4eff-9497-0c31184854e9)
+
+## Installing nodejs using an ansible playbook
+
+1. Making sure that you are in the following directory:
+
+```
+vagrant@controller:/etc/ansible$
+```
+2. Create YAML file which we will use to install nodejs
+
+```
+sudo nano install-nodejs-playbook.yml
+```
+
+3. This will return you to a text file. Following the steps shown in the above diagram we will enter the following(remembering the indents)
+
+```
+# YAML file start with ---
+---
+
+# where would you like to install nginx
+- hosts: web
+# would you like to see logs
+  gather_facts: yes
+# so we need admin access -sudo
+  become: true
+# add the instructions - commands
+  tasks:
+  - name: Add node repo
+    apt_repository:
+      repo: deb https://deb.nodesource.com/node_18.x focal main
+      state: present
+      filename: nodesource.list
+      update_cache: yes
+      cache_valid_time: 3600
+
+  - name: Install node.js
+    apt:
+      name: nodejs
+      state:present
+
+  - name: Install npm
+      apt:
+        name: npm
+        state:present
+
+# ensure status is running/active
+```
+4. This has obtained the nodejs repository and allowed us to install within our playbook
+5. Now we run the playbook
+
+```
+sudo ansible-playbook install-nodejs-playbook.yml
+
+```
+6. 
+
