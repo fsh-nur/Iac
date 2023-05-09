@@ -100,36 +100,37 @@ sudo nano install-nodejs-playbook.yml
 3. This will return you to a text file. Following the steps shown in the above diagram we will enter the following(remembering the indents)
 
 ```
-# YAML file start with ---
 ---
 
-# where would you like to install nginx
 - hosts: web
-# would you like to see logs
-  gather_facts: yes
-# so we need admin access -sudo
+
   become: true
-# add the instructions - commands
+
   tasks:
-  - name: Add node repo
-    apt_repository:
-      repo: deb https://deb.nodesource.com/node_18.x focal main
-      state: present
-      filename: nodesource.list
-      update_cache: yes
-      cache_valid_time: 3600
 
-  - name: Install node.js
+  - name: Install nodejs in web server
+
     apt:
+
       name: nodejs
-      state:present
 
-  - name: Install npm
-      apt:
-        name: npm
-        state:present
+      state: present
 
-# ensure status is running/active
+  - name: Install npm in web server
+
+    apt:
+
+      name: npm
+
+      state: present
+
+  - name: Install python in web server
+
+    apt:
+
+      name: python
+
+      state: present
 ```
 4. This has obtained the nodejs repository and allowed us to install within our playbook
 5. Now we run the playbook
@@ -138,5 +139,13 @@ sudo nano install-nodejs-playbook.yml
 sudo ansible-playbook install-nodejs-playbook.yml
 
 ```
-6. 
+6. You should see this:
+
+![succesful nod](https://github.com/fsh-nur/Iac/assets/129324316/4634301f-3e60-4f99-8c5b-60a6fdcca50b)
+
+7. 
+
+
+
+
 
