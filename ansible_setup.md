@@ -83,4 +83,3 @@ sudo apt install ansible
 ssh vagrant@192.168.33.10
 ```
 
-6. 
