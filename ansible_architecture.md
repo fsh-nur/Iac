@@ -62,4 +62,21 @@ sudo ansible all -m ping
 
 ```
 
+## How to transfer data from the controller to the web server
+
+1. Create a file `testing.txt` and input a line of text
+
+```
+sudo nano testing.txt
+```
+2. Save and exit
+
+```
+CTRL + X yes
+```
+3. Now enter the following command where `src` is the file you would like to move and `dest` is the destination you would move it to 
+
+```
+sudo ansible web -m copy -a "src=/etc/ansible/testing.txt dest=/home/vagrant"
+```
 
