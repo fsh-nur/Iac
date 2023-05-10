@@ -198,3 +198,73 @@ ansible db -a "sudo systemctl status mongodb"
 ![mongodb successful](https://github.com/fsh-nur/Iac/assets/129324316/8bcec0a4-a940-452e-b7c0-7ef33dbab01d)
 
 
+## Creating a YAML file to change bindIP in db VM
+
+1. Create an ansible playbook called `mongo-conf.yml`
+
+```
+sudo nano mongo-conf.yml
+```
+2. Enter the following into your yaml file:
+
+```
+---
+# host is our db
+
+- hosts: db
+
+  gather_facts: yes
+
+  become: true
+
+  tasks:
+
+  - name: Remove mongodb file (delete file)
+    file:
+      path: /etc/mongodb.conf
+      state: absent
+
+  - name: Create the file with read permission and user have write permission
+    file:
+      path: /etc/mongodb.conf
+      state: touch
+      mode: u=rw,g=r,o=r
+
+  - name: Insert multiple lines and Backup
+    blockinfile:
+      path: /etc/mongodb.conf
+
+      block: |
+        storage:
+          dbPath: /var/lib/mongodb
+          journal:
+            enabled: true
+
+        systemLog:
+          destination: file
+          logAppend: true
+          path: /var/log/mongodb/mongod.log
+
+        net:
+          port: 27017
+          bindIp: 0.0.0.0
+
+  - name: Restart mongodb
+    become: true
+    shell: systemctl restart mongodb
+
+  - name: enable mongodb
+    become: true
+    shell: systemctl enable mongodb
+
+  - name: start mongodb
+    become: true
+    shell: systemctl start mongodb
+
+```
+
+3. Now initiate your playbook 
+
+```
+sudo ansible-playbook mongo-conf.yaml
+```
