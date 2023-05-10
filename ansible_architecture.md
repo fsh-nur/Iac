@@ -143,9 +143,55 @@ sudo ansible-playbook install-nodejs-playbook.yml
 
 ![succesful nod](https://github.com/fsh-nur/Iac/assets/129324316/4634301f-3e60-4f99-8c5b-60a6fdcca50b)
 
-7. 
+7. Move the `app` folder to the veb VM:
 
+```
+scp -r /c/Users/fshei/desktop/github/tech221_virtualisation/app vagrant@192.168.33.10:/home/vagrant
+```
+8. SSH into the web VM and cd into the app
 
+```
+ssh vagrant@194.168.33.10
+cd app
+```
+10. Start the app
 
+```
+node app.js
+```
 
+## Setup of MongoDB in the DB agent node
 
+1. SSH into `controller` VM
+2. cd into ansible
+
+```
+cd /etc/ansible/
+```
+3. Create a playbook 
+
+```
+sudo nano mongodb-playbook.yml
+```
+4. Insert the following code into the playbook
+
+```
+---
+- hosts: db
+  gather_facts: yes
+  become: true
+    tasks:
+  - name: Configuring Mongodb in db agent node
+    apt: pkg=mongodb state=present
+```
+
+5. Run the script using this command:
+
+```
+sudo nano ansible-playbook mongo-db-playbook.yml
+```
+6. We can do a status check where we should see `active:active`
+
+```
+ansible db -a "sudo systemctl status mongodb"
+```
