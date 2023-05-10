@@ -195,3 +195,6 @@ sudo nano ansible-playbook mongo-db-playbook.yml
 ```
 ansible db -a "sudo systemctl status mongodb"
 ```
+![mongodb successful](https://github.com/fsh-nur/Iac/assets/129324316/8bcec0a4-a940-452e-b7c0-7ef33dbab01d)
+
+
